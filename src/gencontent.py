@@ -2,6 +2,19 @@ import os
 from markdown_blocks import markdown_to_html_node
 
 
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+    for root, dirs, files in os.walk(dir_path_content):
+        for filename in files:
+            if filename.endswith(".md"):
+                full_md_path = os.path.join(root, filename)
+
+                rel_path = os.path.relpath(full_md_path, dir_path_content)
+
+                rel_html_path = os.path.splitext(rel_path)[0] + ".html"
+                dest_full_path = os.path.join(dest_dir_path, rel_html_path)
+
+                generate_page(full_md_path, template_path, dest_full_path)
+
 def generate_page(from_path, template_path, dest_path):
     print(f" * {from_path} {template_path} -> {dest_path}")
     from_file = open(from_path, "r")
@@ -31,4 +44,4 @@ def extract_title(md):
     for line in lines:
         if line.startswith("# "):
             return line[2:].strip()
-    raise ValueError("no title found")
+    raise Exception("No h1 header found in markdown")

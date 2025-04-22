@@ -4,6 +4,8 @@ from textnode import TextNode, TextType
 
 
 def text_to_textnodes(text):
+    print(f"Type of text: {type(text)}")
+    print(f"Text content: {text}")
     nodes = [TextNode(text, TextType.TEXT)]
     nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD)
     nodes = split_nodes_delimiter(nodes, "_", TextType.ITALIC)
