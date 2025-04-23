@@ -1,6 +1,6 @@
 import os
 import shutil
-
+import sys
 from copystatic import copy_files_recursive
 from gencontent import generate_page
 from gencontent import generate_pages_recursive
@@ -27,6 +27,7 @@ def main():
         dir_path_content,
         template_path,
         dir_path_output,
+        basepath
     )
 
 
